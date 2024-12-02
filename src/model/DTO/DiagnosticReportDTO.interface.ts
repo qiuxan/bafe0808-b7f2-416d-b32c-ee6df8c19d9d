@@ -9,7 +9,7 @@ export interface DiagnosticReportDTO {
 }
 
 export interface StrandDetail {
-    strandName: string;
+    strandName: 'Statistics and Probability'| 'Number and Algebra' | 'Measurement and Geometry';
     correct: number;
     total: number;
 }
