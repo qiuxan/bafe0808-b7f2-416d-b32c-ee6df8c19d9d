@@ -3,7 +3,7 @@ interface Student {
   yearLevel: number;
 }
 
-interface Response {
+export interface Response {
   questionId: string;
   response: string;
 }
