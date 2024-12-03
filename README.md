@@ -15,9 +15,9 @@ You can install the CLI application globally using npm:
 
 ```bash
 npm install 
-```plaintext
+```
 
-### Running the Application
+## Running the Application
 
 ```bash
 # Run the application in development mode
