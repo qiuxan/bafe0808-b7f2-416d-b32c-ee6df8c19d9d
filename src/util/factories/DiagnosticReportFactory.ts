@@ -7,16 +7,16 @@ import { toolKit } from "../ToolKit";
 import { StudentReportFactory } from "./StudentReportFactory";
 
 export class DiagnosticReportFactory extends StudentReportFactory {
-    private _studentId!: string;
-    private _student!: Student;
-    private _currentStudentResponses!: StudentResponse[];
-    private _studentLastCompletedResponse!: StudentResponse;
-    private _strandDetails!: StrandDetail[];
-    private _recentCompleteTime!: string;
-    private _DiagnosticReportDTO!: DiagnosticReportDTO;
-    private _assessmentName!: string;
-    private _totalQuestions!: number;
-    private _correctAnswers!: number;
+    protected _studentId!: string;
+    protected _student!: Student;
+    protected _currentStudentResponses!: StudentResponse[];
+    protected _studentLastCompletedResponse!: StudentResponse;
+    protected _strandDetails!: StrandDetail[];
+    protected _recentCompleteTime!: string;
+    protected _DiagnosticReportDTO!: DiagnosticReportDTO;
+    protected _assessmentName!: string;
+    protected _totalQuestions!: number;
+    protected _correctAnswers!: number;
 
     private _report!:string;
 
