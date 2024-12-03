@@ -63,7 +63,7 @@ export class DiagnosticReportFactory extends StudentReportFactory {
     private setRecentCompleteTime():DiagnosticReportFactory{
 
         const completedDate = this._studentResponseWithLargestYearLevel.completed || '';
-        const dateToStore = toolKit.formateDate(completedDate);
+        const dateToStore = toolKit.formatDate(completedDate);
         this._recentCompleteTime = dateToStore;
         return this;
     }
@@ -116,9 +116,6 @@ export class DiagnosticReportFactory extends StudentReportFactory {
                 }
             });
             
-            
-
-            // console.log({ question });
         });
 
      

@@ -14,7 +14,7 @@ interface ToolKit{
         questions: Question[];
     };
     
-    formateDate: (date: string) => string;
+    formatDate: (date: string, withTime?:boolean ) => string;
     getDaySuffix: (day: number) => string;
     formatTime: (hours: number, minutes: number) => string;
 };
@@ -46,7 +46,7 @@ export const toolKit: ToolKit = {
         };
     },
 
-    formateDate: (dateString: string) => {
+    formatDate: (dateString: string, withTime: boolean = true) => {
         const months = [
             "January", "February", "March", "April", "May", "June",
             "July", "August", "September", "October", "November", "December"
@@ -56,12 +56,15 @@ export const toolKit: ToolKit = {
         const [year, time] = yearAndTime.split(' ');
         const [hours, minutes, seconds] = time.split(':');
     
-        const date = new Date(`${year}-${month}-${day}T${time}`);
         const daySuffix = toolKit.getDaySuffix(parseInt(day));
         const monthName = months[parseInt(month) - 1];
-        const formattedTime = toolKit.formatTime(parseInt(hours), parseInt(minutes));
-    
-        return `${parseInt(day)}${daySuffix} ${monthName} ${year} ${formattedTime}`;
+
+        let formattedTime ='';
+
+        if(withTime){
+            formattedTime = ' '+toolKit.formatTime(parseInt(hours), parseInt(minutes));
+        }
+        return `${parseInt(day)}${daySuffix} ${monthName} ${year}${formattedTime}`;
     },
 
     getDaySuffix(day: number): string {
