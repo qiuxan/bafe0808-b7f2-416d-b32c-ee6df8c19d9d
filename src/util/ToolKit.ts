@@ -28,22 +28,32 @@ export const toolKit: ToolKit = {
     },
 
     getData : () => {
-        const studentsFilePath = path.join(__dirname, '../../data/students.json');
-        const studentResponsesFilePath = path.join(__dirname, '../../data/student-responses.json');
-        const assessmentsFilePath = path.join(__dirname, '../../data/assessments.json');
-        const questionsFilePath = path.join(__dirname, '../../data/questions.json');
+        try {
+            const studentsFilePath = path.join(__dirname, '../../data/students.json');
+            const studentResponsesFilePath = path.join(__dirname, '../../data/student-responses.json');
+            const assessmentsFilePath = path.join(__dirname, '../../data/assessments.json');
+            const questionsFilePath = path.join(__dirname, '../../data/questions.json');
     
-        const students: Student[] = toolKit.readJsonFile(studentsFilePath) as Student[];
-        const studentResponses: StudentResponse[] = toolKit.readJsonFile(studentResponsesFilePath) as StudentResponse[];
-        const assessments: Assessment[] = toolKit.readJsonFile(assessmentsFilePath) as Assessment[];
-        const questions: Question[] = toolKit.readJsonFile(questionsFilePath) as Question[];
+            const students: Student[] = toolKit.readJsonFile(studentsFilePath) as Student[];
+            const studentResponses: StudentResponse[] = toolKit.readJsonFile(studentResponsesFilePath) as StudentResponse[];
+            const assessments: Assessment[] = toolKit.readJsonFile(assessmentsFilePath) as Assessment[];
+            const questions: Question[] = toolKit.readJsonFile(questionsFilePath) as Question[];
     
-        return {
-            students,
-            studentResponses,
-            assessments,
-            questions,
-        };
+            return {
+                students,
+                studentResponses,
+                assessments,
+                questions,
+            };
+        } catch (error) {
+            console.error('Error reading data files:', error);
+            return {
+                students: [],
+                studentResponses: [],
+                assessments: [],
+                questions: [],
+            };
+        }
     },
 
     formatDate: (dateString: string, withTime: boolean = true) => {
