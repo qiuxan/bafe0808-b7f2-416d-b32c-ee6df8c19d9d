@@ -1,11 +1,13 @@
-export interface Assessment {
+export interface CompletedAssessment {
     date: string;
     rawScore: number;
     totalQuestions: number;
 }
 
 export interface ProgressReportDTO {
-    name: string;
-    assessments: Assessment[];
-    improvement: string;
+    userFirstName: string;
+    userLastName: string;
+    totalTestNumber: number;
+    completedAssessments: CompletedAssessment[];
+    improvement: number;
 }
