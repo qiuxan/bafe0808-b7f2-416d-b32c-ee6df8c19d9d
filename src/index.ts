@@ -7,8 +7,8 @@ const { students, studentResponses, assessments, questions } = toolKit.getData()
 
 
 
-const studentId  = 'student3';
-const reportId: number = 2;
+const studentId  = 'student1';
+const reportId: number = 1;
 
 switch (reportId) {
     case 1:

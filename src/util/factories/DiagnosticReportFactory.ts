@@ -10,7 +10,7 @@ export class DiagnosticReportFactory extends StudentReportFactory {
     private _studentId!: string;
     private _student!: Student;
     private _currentStudentResponses!: StudentResponse[];
-    private _studentResponseWithLargestYearLevel!: StudentResponse;
+    private _studentLastCompletedResponse!: StudentResponse;
     private _strandDetails!: StrandDetail[];
     private _recentCompleteTime!: string;
     private _DiagnosticReportDTO!: DiagnosticReportDTO;
@@ -45,7 +45,7 @@ export class DiagnosticReportFactory extends StudentReportFactory {
         this.setStudentDataById(studentId)
             .setStudent()
             .setCurrentStudentResponsesByStudentId()
-            .setStudentResponseWithLargestYearLevel()
+            .setStudentLastCompletedResponse()
             .setRecentCompleteTime()
             .setAssessmentName()
             .setStrandDetails()
@@ -62,14 +62,14 @@ export class DiagnosticReportFactory extends StudentReportFactory {
 
     private setRecentCompleteTime():DiagnosticReportFactory{
 
-        const completedDate = this._studentResponseWithLargestYearLevel.completed || '';
+        const completedDate = this._studentLastCompletedResponse.completed || '';
         const dateToStore = toolKit.formatDate(completedDate);
         this._recentCompleteTime = dateToStore;
         return this;
     }
 
     private setAssessmentName():DiagnosticReportFactory{
-        this._assessmentName = this._assessments.find(assessment => assessment.id === this._studentResponseWithLargestYearLevel.assessmentId)!.name;
+        this._assessmentName = this._assessments.find(assessment => assessment.id === this._studentLastCompletedResponse.assessmentId)!.name;
         return this;
     };
 
@@ -88,10 +88,17 @@ export class DiagnosticReportFactory extends StudentReportFactory {
         return this;
     }
 
-    private setStudentResponseWithLargestYearLevel(): DiagnosticReportFactory {
-        this._studentResponseWithLargestYearLevel = this._currentStudentResponses.reduce((prev, current) => {
-            return (prev.student.yearLevel > current.student.yearLevel) ? prev : current;
+    private setStudentLastCompletedResponse(): DiagnosticReportFactory {
+
+        let theLatesetCompletedResponse:StudentResponse = this._currentStudentResponses[0];
+       
+        this._currentStudentResponses.forEach(response => {
+            if(response.completed){
+                theLatesetCompletedResponse = response;
+            }
         });
+
+        this._studentLastCompletedResponse = theLatesetCompletedResponse;
         return this;
     }
 
@@ -100,7 +107,7 @@ export class DiagnosticReportFactory extends StudentReportFactory {
         this._questions.forEach(question => {
 
             // Don't have to do this forEach, if the response order can be sorted by questionId. Just to play safe. 
-            this._studentResponseWithLargestYearLevel.responses.forEach(response => { 
+            this._studentLastCompletedResponse.responses.forEach(response => { 
                 if (response.questionId === question.id) {
                     const correctAnswer = question.config.key;
                     if (correctAnswer) {
