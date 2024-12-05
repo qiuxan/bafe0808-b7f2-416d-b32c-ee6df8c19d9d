@@ -5,6 +5,7 @@ import { Student } from "../../model/Student.interface";
 import { StudentResponse } from "../../model/StudentResponse.interface";
 import { toolKit } from "../ToolKit";
 import { StudentReportFactory } from "./StudentReportFactory";
+import {STRAND_NAMES} from "../../constants/StrandNames";
 
 export class DiagnosticReportFactory extends StudentReportFactory {
     protected _studentId!: string;
@@ -26,11 +27,7 @@ export class DiagnosticReportFactory extends StudentReportFactory {
         this._totalQuestions = 0;
         this._correctAnswers = 0;
 
-        this._strandDetails = [
-            { strandName: 'Number and Algebra', correct: 0, total: 0 },
-            { strandName: 'Measurement and Geometry', correct: 0, total: 0 },
-            { strandName: 'Statistics and Probability', correct: 0, total: 0 },
-        ];
+        this._strandDetails = STRAND_NAMES.map((strandName: typeof STRAND_NAMES[number]) => ({ strandName, correct: 0, total: 0 })); // Explicitly type strandName
 
         this._DiagnosticReportDTO = {
             userFirstName: '',
