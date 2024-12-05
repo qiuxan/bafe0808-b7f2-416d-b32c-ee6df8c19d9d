@@ -1,3 +1,5 @@
+import { STRAND_NAMES } from "../../constants/StrandNames"; // Add this import
+
 export interface DiagnosticReportDTO {
     userFirstName: string;
     userLastName: string;
@@ -9,7 +11,7 @@ export interface DiagnosticReportDTO {
 }
 
 export interface StrandDetail {
-    strandName: 'Statistics and Probability'| 'Number and Algebra' | 'Measurement and Geometry';
+    strandName: typeof STRAND_NAMES[number]; // Use the constant array type
     correct: number;
     total: number;
 }
