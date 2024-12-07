@@ -2,6 +2,7 @@
   {
     "id": "student1",
     "firstName": "Tony",
+    "middleName": "Edward",
     "lastName": "Stark",
     "yearLevel": 6
   },
