@@ -5,8 +5,7 @@ export interface CompletedAssessment {
 }
 
 export interface ProgressReportDTO {
-    userFirstName: string;
-    userLastName: string;
+    userFullName: string;
     totalTestNumber: number;
     completedAssessments: CompletedAssessment[];
     improvement: number;

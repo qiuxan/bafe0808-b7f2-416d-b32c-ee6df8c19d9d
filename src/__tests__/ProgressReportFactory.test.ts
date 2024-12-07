@@ -4,6 +4,7 @@ import { Student } from '../model/Student.interface';
 import { StudentResponse } from '../model/StudentResponse.interface';
 import { Assessment } from '../model/Assessment.interface';
 import { Question } from '../model/Question.interface';
+import { GET_FULL_NAME } from '../constants/Functions';
 
 describe('ProgressReportFactory', () => {
     let students: Student[];
@@ -15,7 +16,9 @@ describe('ProgressReportFactory', () => {
         students = [
             {
                 id: '1', firstName: 'John', lastName: 'Doe',
-                yearLevel: 5
+                yearLevel: 5,
+                getFullName:GET_FULL_NAME
+
             },
         ];
 

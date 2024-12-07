@@ -20,8 +20,7 @@ export class ProgressReportFactory extends StudentReportFactory {
         this._studentId = studentId;
 
         this._progressReportDTO = {
-            userFirstName: '',
-            userLastName: '',
+            userFullName: '',
             totalTestNumber: 0,
             completedAssessments: [],
             improvement: 0
@@ -84,8 +83,7 @@ export class ProgressReportFactory extends StudentReportFactory {
 
     private setProgressReportDTO(): ProgressReportFactory {
         this._progressReportDTO = {
-            userFirstName: this._student.firstName,
-            userLastName: this._student.lastName,
+            userFullName: this._student.getFullName(),
             totalTestNumber: this._completedAssessments.length,
             completedAssessments: this._completedAssessments,
             improvement: this._improvement
@@ -94,8 +92,8 @@ export class ProgressReportFactory extends StudentReportFactory {
     }
 
     private setReport(): ProgressReportFactory {
-        const { userFirstName, userLastName, completedAssessments, improvement } = this._progressReportDTO;
-        let report = `${userFirstName} ${userLastName} has completed Numeracy assessment ${completedAssessments.length} times in total. Date and raw score given below:\n\n`;
+        const {userFullName, completedAssessments, improvement } = this._progressReportDTO;
+        let report = `${userFullName} has completed Numeracy assessment ${completedAssessments.length} times in total. Date and raw score given below:\n\n`;
 
         completedAssessments.forEach(assessment => {
             report += `Date: ${assessment.date}, Raw Score: ${assessment.rawScore} out of ${assessment.totalQuestions}\n`;
@@ -103,13 +101,13 @@ export class ProgressReportFactory extends StudentReportFactory {
 
         let conclustionSentence;
         if(improvement > 0){
-            conclustionSentence = `\n${userFirstName} ${userLastName} got ${improvement} more correct in the recent completed assessment than the oldest`;
+            conclustionSentence = `\n${userFullName} got ${improvement} more correct in the recent completed assessment than the oldest`;
         }  
         if(improvement < 0){
-            conclustionSentence  = `\n${userFirstName} ${userLastName} got ${Math.abs(improvement)} less correct in the recent completed assessment than the oldest`;
+            conclustionSentence  = `\n${userFullName} got ${Math.abs(improvement)} less correct in the recent completed assessment than the oldest`;
         }  
         if(improvement === 0){
-            conclustionSentence = `\n${userFirstName} ${userLastName} got the same number of correct answers in the recent completed assessment as the oldest`;
+            conclustionSentence = `\n${userFullName} got the same number of correct answers in the recent completed assessment as the oldest`;
         }
 
         report += conclustionSentence;
