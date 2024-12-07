@@ -4,6 +4,7 @@ import { Question } from '../model/Question.interface';
 import { Student } from '../model/Student.interface';
 import { Assessment } from '../model/Assessment.interface';
 import { StudentResponse } from '../model/StudentResponse.interface';
+import { GET_FULL_NAME } from '../constants/Functions';
 
 interface ToolKit{
     readJsonFile: (filePath: string) => object;
@@ -35,6 +36,10 @@ export const toolKit: ToolKit = {
             const questionsFilePath = path.join(__dirname, '../../data/questions.json');
     
             const students: Student[] = toolKit.readJsonFile(studentsFilePath) as Student[];
+            // Add printName method to each student
+            students.forEach(student => {
+                student.getFullName = GET_FULL_NAME;
+            });
             const studentResponses: StudentResponse[] = toolKit.readJsonFile(studentResponsesFilePath) as StudentResponse[];
             const assessments: Assessment[] = toolKit.readJsonFile(assessmentsFilePath) as Assessment[];
             const questions: Question[] = toolKit.readJsonFile(questionsFilePath) as Question[];

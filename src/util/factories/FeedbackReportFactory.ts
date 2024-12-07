@@ -15,8 +15,7 @@ export class FeedbackReportFactory extends DiagnosticReportFactory {
         super(studentId,students, allStudentsResponses, assessments, questions);
 
         this._FeedbackReportDTO = {
-            candidateFirstName: '',
-            candidateLastName: '',
+            userFullName: '',
             assessmentType: '',
             completionDate: '',
             correctAnswers: 0,
@@ -61,8 +60,7 @@ export class FeedbackReportFactory extends DiagnosticReportFactory {
         return this;
     }
     private setFeedbackReportDTO(): FeedbackReportFactory {
-        this._FeedbackReportDTO.candidateFirstName = this._student.firstName;
-        this._FeedbackReportDTO.candidateLastName = this._student.lastName;
+        this._FeedbackReportDTO.userFullName = this._student.getFullName();
         this._FeedbackReportDTO.assessmentType = this._assessmentName;
         this._FeedbackReportDTO.completionDate = this._recentCompleteTime;
         this._FeedbackReportDTO.correctAnswers = this._correctAnswers;
@@ -71,17 +69,20 @@ export class FeedbackReportFactory extends DiagnosticReportFactory {
         return this;
     }
     private setFeedbackReport(): FeedbackReportFactory {
-        this._feedbackReport = 
-        [
-            `${this._FeedbackReportDTO.candidateFirstName} ${this._FeedbackReportDTO.candidateLastName} recently completed ${this._FeedbackReportDTO.assessmentType} assessment on ${this._FeedbackReportDTO.completionDate}`,
-            `He got ${this._FeedbackReportDTO.correctAnswers} questions right out of ${this._FeedbackReportDTO.totalQuestions}. Feedback for wrong answers given below`,
-            ...this._feebacks.map(feedback => [
-                `Question: ${feedback.question}`,
-                `Your answer: ${feedback.yourAnswer.label} with value ${feedback.yourAnswer.value}`,
-                `Right answer: ${feedback.rightAnswer.label} with value ${feedback.rightAnswer.value}`,
-                `Hint: ${feedback.hint}`
-            ].join('\n'))
+        const { userFullName, assessmentType, completionDate, correctAnswers, totalQuestions } = this._FeedbackReportDTO;
+        const feedbackDetails = this._feebacks.map(feedback => [
+            `Question: ${feedback.question}`,
+            `Your answer: ${feedback.yourAnswer.label} with value ${feedback.yourAnswer.value}`,
+            `Right answer: ${feedback.rightAnswer.label} with value ${feedback.rightAnswer.value}`,
+            `Hint: ${feedback.hint}`
+        ].join('\n'));
+
+        this._feedbackReport = [
+            `${userFullName} recently completed ${assessmentType} assessment on ${completionDate}`,
+            `He got ${correctAnswers} questions right out of ${totalQuestions}. Feedback for wrong answers given below`,
+            ...feedbackDetails
         ].join('\n\n');
+
         return this;
     }
     

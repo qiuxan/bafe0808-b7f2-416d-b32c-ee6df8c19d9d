@@ -1,8 +1,7 @@
 import { STRAND_NAMES } from "../../constants/StrandNames"; // Add this import
 
 export interface DiagnosticReportDTO {
-    userFirstName: string;
-    userLastName: string;
+    userFullName: string;
     LastCompletedAssessment: string;
     LastCompletedAssessmenttDate: string;
     totalQuestions: number;

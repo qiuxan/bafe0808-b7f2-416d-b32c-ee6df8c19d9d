@@ -3,4 +3,5 @@ export interface Student {
   firstName: string;
   lastName: string;
   yearLevel: number;
+  getFullName: () => string;
 }

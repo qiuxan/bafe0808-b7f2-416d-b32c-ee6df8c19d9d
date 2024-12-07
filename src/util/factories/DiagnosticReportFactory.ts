@@ -30,8 +30,7 @@ export class DiagnosticReportFactory extends StudentReportFactory {
         this._strandDetails = STRAND_NAMES.map((strandName: typeof STRAND_NAMES[number]) => ({ strandName, correct: 0, total: 0 })); // Explicitly type strandName
 
         this._DiagnosticReportDTO = {
-            userFirstName: '',
-            userLastName: '',
+            userFullName: '',
             LastCompletedAssessment: '',
             LastCompletedAssessmenttDate: '',
             totalQuestions: 0,
@@ -143,8 +142,7 @@ export class DiagnosticReportFactory extends StudentReportFactory {
 
     private setDiagnosticReportDTO(): DiagnosticReportFactory {
         this._DiagnosticReportDTO = {
-            userFirstName: this._student.firstName,
-            userLastName: this._student.lastName,
+            userFullName: this._student.getFullName(),
             LastCompletedAssessment: this._assessmentName,
             LastCompletedAssessmenttDate: this._recentCompleteTime,
             totalQuestions: this._totalQuestions,
@@ -155,8 +153,8 @@ export class DiagnosticReportFactory extends StudentReportFactory {
     }
 
     private setReport(): DiagnosticReportFactory {
-        const { userFirstName, userLastName, LastCompletedAssessment, LastCompletedAssessmenttDate, totalQuestions, correctAnswers, strands } = this._DiagnosticReportDTO;
-        let report = `${userFirstName} ${userLastName} recently completed ${LastCompletedAssessment} assessment on ${LastCompletedAssessmenttDate}\n`;
+        const { userFullName, LastCompletedAssessment, LastCompletedAssessmenttDate, totalQuestions, correctAnswers, strands } = this._DiagnosticReportDTO;
+        let report = `${userFullName} recently completed ${LastCompletedAssessment} assessment on ${LastCompletedAssessmenttDate}\n`;
         report += `He got ${correctAnswers} questions right out of ${totalQuestions}. Details by strand given below:\n\n`;
     
         strands.forEach((strand: StrandDetail) => {

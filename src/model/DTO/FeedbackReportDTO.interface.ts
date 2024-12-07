@@ -1,6 +1,5 @@
 export interface FeedbackReportDTO {
-    candidateFirstName: string;
-    candidateLastName: string;
+    userFullName: string;
 
     assessmentType: string;
 
